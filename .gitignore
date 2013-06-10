@@ -1,0 +1,12 @@
+target
+.classpath
+.project
+.settings
+.idea
+bin
+rebel.xml
+*.sw?
+*/src/main/java/META-INF
+impl/coverage.ec
+*.DS_Store
+*.iml
