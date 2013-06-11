@@ -10,6 +10,6 @@ import javax.enterprise.event.Observes;
 public class MessageObserver {
 
     public void observesWorldMessages(@Observes String msg) {
-        System.out.println("Suspicious message trapped : " + msg);
+        System.out.println("Keyword was trapped here : " + msg);
     }
 }
