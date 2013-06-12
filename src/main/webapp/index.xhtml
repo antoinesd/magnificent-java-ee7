@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>WebSocket Chat</title>
+</h:head>
+<h:body>
+    <p:layout style="width:1024px;height:600px;margin-left: auto;margin-right: auto;">
+        <p:layoutUnit position="center" header="Chat-e-Chat-o">
+
+
+            <div style="text-align: center;">
+                <h:form id="chat">
+                    <table>
+                        <tr>
+                            <td>
+                                Users<br/>
+                                <p:inputTextarea readonly="true" rows="6" cols="20" id="userField"/>
+                            </td>
+                            <td>
+                                Chat Log<br/>
+                                <p:inputTextarea readonly="true" rows="6" cols="50" id="chatlogField"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:inputText id="textField" name="name" value="Duke"/>
+                                <br/>
+                                <p:commandButton onclick="join();" value="Join" id="join"/>
+                                <p:commandButton onclick="send_message();" value="Chat" id="chat"/>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>
+            <div id="output"></div>
+            <script language="javascript" type="text/javascript" src="websocket.js">
+            </script>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>
