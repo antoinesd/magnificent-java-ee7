@@ -23,7 +23,7 @@ public abstract class ChatEndListenerDecorator implements ChatEndpoint {
 
     @Override
     public void message(String message, Session client) throws IOException, EncodeException {
-        if (message.toLowerCase().indexOf("world") > -1)
+        if (message.toLowerCase().indexOf("world") > -1 || message.toLowerCase().indexOf("cartman") > -1)
             events.fire(message);
         chatEndpoint.message(message, client);
     }
