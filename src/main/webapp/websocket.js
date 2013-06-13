@@ -63,7 +63,10 @@ function join() {
 }
 
 function send_message() {
-    websocket.send(username + ": " + textField.value);
+    var msg = new Object();
+    msg.user = username;
+    msg.content = textField.value;
+    websocket.send(JSON.stringify(msg));
 }
 
 function onOpen() {
@@ -71,12 +74,13 @@ function onOpen() {
 }
 
 function onMessage(evt) {
-    console.log("onMessage");
+    console.log("onMessage : " + evt.data);
     writeToScreen("RECEIVED: " + evt.data);
     if (evt.data.indexOf("joined") != -1) {
         userField.innerHTML += evt.data.substring(0, evt.data.indexOf(" joined")) + "\n";
     } else {
-        chatlogField.innerHTML += evt.data + "\n";
+        var msg = JSON.parse(evt.data)
+        chatlogField.innerHTML += msg.content + " said " + msg.user + "\n";
     }
 }
 

@@ -39,9 +39,14 @@
  */
 package org.lab.javaee.chat;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.stream.JsonParsingException;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,7 +58,6 @@ import java.util.Set;
 @ServerEndpoint("/websocket")
 public class ChatEndpointImpl implements ChatEndpoint {
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
-
 
     @Override
     @OnOpen
@@ -70,6 +74,19 @@ public class ChatEndpointImpl implements ChatEndpoint {
     @Override
     @OnMessage
     public void message(String message, Session client) throws IOException, EncodeException {
+        System.out.println(message);
+        JsonReader reader = Json.createReader(new StringReader(message));
+        try {
+            JsonObject msgObj = reader.readObject();
+            Message msg = new Message();
+            msg.setUser(msgObj.getString("user"));
+            msg.setContent(msgObj.getString("content"));
+            System.out.println("Message from " + msg.getUser() + " : " + msg.getContent());
+        } catch (JsonParsingException e) {
+            System.out.println("Message is not in JSON format");
+        } finally {
+            reader.close();
+        }
         for (Session peer : peers) {
             peer.getAsyncRemote().sendObject(message);
         }
