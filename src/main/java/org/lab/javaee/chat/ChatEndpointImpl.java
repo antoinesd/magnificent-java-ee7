@@ -39,6 +39,7 @@
  */
 package org.lab.javaee.chat;
 
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -58,6 +59,9 @@ import java.util.Set;
 @ServerEndpoint("/websocket")
 public class ChatEndpointImpl implements ChatEndpoint {
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+
+    @Inject
+    MessageService msgServ;
 
     @Override
     @OnOpen
@@ -82,6 +86,7 @@ public class ChatEndpointImpl implements ChatEndpoint {
             msg.setUser(msgObj.getString("user"));
             msg.setContent(msgObj.getString("content"));
             System.out.println("Message from " + msg.getUser() + " : " + msg.getContent());
+            msgServ.persistMessage(msg);
         } catch (JsonParsingException e) {
             System.out.println("Message is not in JSON format");
         } finally {
