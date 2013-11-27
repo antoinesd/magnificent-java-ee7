@@ -42,6 +42,11 @@ package org.lab.javaee.chat;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.websocket.*;
+import javax.websocket.EncodeException;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
@@ -75,7 +80,7 @@ public class ChatEndpoint {
         if (message.toLowerCase().indexOf("world") > -1)
             events.fire(message);
         for (Session peer : peers) {
-            peer.getAsyncRemote().sendObject(message);
+            peer.getAsyncRemote().sendText(message);
         }
     }
 }
