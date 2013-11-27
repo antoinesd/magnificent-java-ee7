@@ -52,7 +52,7 @@ import java.util.Set;
 
 
 /**
- * @author Arun Gupta
+ * @author Antoine Sabot-Durand
  */
 @ServerEndpoint("/websocket")
 public class ChatEndpoint {
