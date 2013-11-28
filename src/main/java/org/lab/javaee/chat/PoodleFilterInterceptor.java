@@ -1,8 +1,9 @@
 package org.lab.javaee.chat;
 
 
+import org.lab.javaee.chat.jms.JmsSenderService;
+
 import javax.annotation.Priority;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -24,9 +25,9 @@ public class PoodleFilterInterceptor {
         add("cartman");
     }};
 
+
     @Inject
-    @AdWord
-    private Event<String> adWordEvents;
+    JmsSenderService jms;
 
     @AroundInvoke
     public Object manageTransaction(InvocationContext ctx) throws Exception {
@@ -35,7 +36,7 @@ public class PoodleFilterInterceptor {
             String lmessage = message.toLowerCase();
             for (String s : getDictionary()) {
                 if (lmessage.indexOf(s) > -1) {
-                    adWordEvents.fire(s);
+                    jms.sendMessage(s);
                 }
             }
         }
