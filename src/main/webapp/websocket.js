@@ -12,10 +12,14 @@ websocket.onerror = function (evt) {
     onError(evt)
 };
 var output = document.getElementById("output");
+var userField = document.getElementById("chat:userField");
+var chatlogField = document.getElementById("chat:chatlogField");
+var textField = document.getElementById("chat:textField");
 
 function join() {
     username = textField.value;
     websocket.send(username + " joined");
+    document.getElementById("chat:join").disabled = true;
 }
 
 function send_message() {
