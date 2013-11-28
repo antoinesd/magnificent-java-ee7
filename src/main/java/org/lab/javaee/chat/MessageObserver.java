@@ -12,4 +12,8 @@ public class MessageObserver {
     public void observesAdWords(@Observes @AdWord String word) {
         System.out.println("Ad word trapped  : " + word);
     }
+
+    public void observesbadWords(@Observes @BadWord String word) {
+        System.out.println("Bad word trapped  : " + word);
+    }
 }

@@ -68,6 +68,7 @@ public class ChatEndpoint {
 
     @OnMessage
     @PoodleFilter
+    @MappleFilter
     public void message(String message, Session client) {
         for (Session peer : peers) {
             peer.getAsyncRemote().sendText(message);
