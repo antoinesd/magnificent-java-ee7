@@ -9,7 +9,7 @@ import javax.enterprise.event.Observes;
  */
 public class MessageObserver {
 
-    public void observesWorldMessages(@Observes String msg) {
-        System.out.println("Suspicious message trapped : " + msg);
+    public void observesAdWords(@Observes @AdWord String word) {
+        System.out.println("Ad word trapped  : " + word);
     }
 }
