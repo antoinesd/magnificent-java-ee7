@@ -10,5 +10,7 @@ public interface ChatService {
 
     boolean remove(Object o);
 
+    void persistMessage(Message msg);
+
     void processMessage(String message);
 }

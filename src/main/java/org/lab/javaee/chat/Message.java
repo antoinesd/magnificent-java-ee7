@@ -1,10 +1,26 @@
 package org.lab.javaee.chat;
 
+import javax.enterprise.inject.Vetoed;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author Antoine Sabot-Durand
  */
+
+@Entity
+@Vetoed
 public class Message {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "USERNAME")
     private String user;
 
     private String content;
@@ -23,5 +39,13 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

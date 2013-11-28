@@ -1,10 +1,12 @@
 package org.lab.javaee.chat;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.stream.JsonParsingException;
+import javax.persistence.EntityManager;
 import javax.websocket.Session;
 import java.io.StringReader;
 import java.util.Collections;
@@ -21,6 +23,9 @@ public class ChatServiceImpl implements ChatService {
 
     private final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
 
+    @Inject
+    EntityManager em;
+
     @Override
     public boolean add(Session session) {
         return peers.add(session);
@@ -29,6 +34,11 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public boolean remove(Object o) {
         return peers.remove(o);
+    }
+
+    @Override
+    public void persistMessage(Message msg) {
+        em.persist(msg);
     }
 
 
