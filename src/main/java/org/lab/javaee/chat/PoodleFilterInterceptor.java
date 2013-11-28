@@ -30,10 +30,9 @@ public class PoodleFilterInterceptor {
 
     @AroundInvoke
     public Object manageTransaction(InvocationContext ctx) throws Exception {
-        String message = (String) ctx.getParameters()[0];
-        String lmessage = message.toLowerCase();
-
         if (ctx.getParameters()[0] instanceof String) {
+            String message = (String) ctx.getParameters()[0];
+            String lmessage = message.toLowerCase();
             for (String s : getDictionary()) {
                 if (lmessage.indexOf(s) > -1) {
                     adWordEvents.fire(s);
