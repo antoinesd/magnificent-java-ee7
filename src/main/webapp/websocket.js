@@ -38,7 +38,7 @@
  * holder.
  */
 
-var wsUri = "ws://" + document.location.host + document.location.pathname + "websocket";
+var wsUri = "ws://" + document.location.host + "/demo-chat/websocket";
 var websocket = new WebSocket(wsUri);
 
 var username;
