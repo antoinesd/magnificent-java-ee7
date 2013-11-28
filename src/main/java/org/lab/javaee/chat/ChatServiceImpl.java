@@ -7,6 +7,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.stream.JsonParsingException;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.websocket.Session;
 import java.io.StringReader;
 import java.util.Collections;
@@ -43,6 +44,7 @@ public class ChatServiceImpl implements ChatService {
 
 
     @Override
+    @Transactional
     public void processMessage(String message) {
         System.out.println(message);
         JsonReader reader = Json.createReader(new StringReader(message));
@@ -52,6 +54,7 @@ public class ChatServiceImpl implements ChatService {
             msg.setUser(msgObj.getString("user"));
             msg.setContent(msgObj.getString("content"));
             System.out.println("Message from " + msg.getUser() + " : " + msg.getContent());
+            persistMessage(msg);
         } catch (JsonParsingException e) {
             System.out.println("Message is not in JSON format");
         } finally {
