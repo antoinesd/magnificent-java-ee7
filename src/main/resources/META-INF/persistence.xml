@@ -5,18 +5,14 @@
              version="2.1">
 
     <persistence-unit name="chatPU" transaction-type="JTA">
-        <jta-data-source>java:global/jdbc/chat</jta-data-source>
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <properties>
-            <!-- Properties for Eclipselink -->
-            <property name="eclipselink.target-database" value="DERBY"/>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-            <property name="eclipselink.logging.level" value="INFO"/>
 
             <!-- Properties for Hibernate -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
         </properties>
     </persistence-unit>
