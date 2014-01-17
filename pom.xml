@@ -46,6 +46,9 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.0.0.Beta1</version>
+                <configuration>
+                    <version>8.0.0.CR1</version>
+                </configuration>
             </plugin>
         </plugins>
     </build>
