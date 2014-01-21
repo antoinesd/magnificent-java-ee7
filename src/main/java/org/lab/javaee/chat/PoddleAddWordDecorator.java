@@ -1,5 +1,7 @@
 package org.lab.javaee.chat;
 
+import org.lab.javaee.chat.jms.JmsSenderService;
+
 import javax.annotation.Priority;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
@@ -28,6 +30,8 @@ public abstract class PoddleAddWordDecorator implements ChatService {
         add("cartman");
     }};
 
+    @Inject
+    JmsSenderService jms;
 
     @Inject
     @AdWord
@@ -39,7 +43,7 @@ public abstract class PoddleAddWordDecorator implements ChatService {
         String lmessage = message.toLowerCase();
         for (String s : adWords) {
             if (lmessage.indexOf(s) > -1) {
-                events.fire(s);
+                jms.sendMessage(s);
             }
         }
         delegateService.processMessage(message);
