@@ -10,6 +10,7 @@ import java.util.Set;
  * @author Antoine Sabot-Durand
  */
 @ApplicationScoped
+@Log
 public class ChatServiceImpl implements ChatService {
 
 

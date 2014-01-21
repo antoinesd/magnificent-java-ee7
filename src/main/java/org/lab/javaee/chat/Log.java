@@ -1,16 +1,16 @@
 package org.lab.javaee.chat;
 
-import javax.interceptor.Interceptor;
-import java.lang.annotation.Documented;
+import javax.interceptor.InterceptorBinding;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Antoine Sabot-Durand
  */
-@Interceptor
-@Documented
-@Retention(RUNTIME)
+@InterceptorBinding
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Log {
 }
