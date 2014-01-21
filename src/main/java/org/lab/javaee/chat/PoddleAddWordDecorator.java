@@ -30,6 +30,7 @@ public abstract class PoddleAddWordDecorator implements ChatService {
 
 
     @Inject
+    @AdWord
     private Event<String> events;
 
 

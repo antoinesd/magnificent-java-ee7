@@ -7,8 +7,12 @@ import javax.enterprise.event.Observes;
  */
 public class MessageObserver {
 
-    public void observesWorldMessages(@Observes String msg) {
-        System.out.println("Keyword was trap here : " + msg);
+    public void observesAdWords(@Observes @AdWord String msg) {
+        System.out.println("AdWord was trap here : " + msg);
+    }
+
+    public void observesBadWords(@Observes @BadWord String msg) {
+        System.out.println("Bad word was trap here : " + msg);
     }
 
 
